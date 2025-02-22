@@ -2,6 +2,39 @@ import Link from "next/link";
 import { auth } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
 
+const mockClubs = [
+  {
+    name:"BoilerMake",
+    description:"Manage a hackathon",
+    tags:["Professional","Development"]
+
+  },
+  {
+    name:"USB",
+    description:"Undergrauate Student Board",
+    tags:["Professional","Event Planning"]
+
+  },
+  {
+    name:"Rock Climbing Club",
+    description:"Rock climbing",
+    tags:["Athletics/Sports","Recreational"]
+
+  },
+  {
+    name:"Outing Club",
+    description:"Touch grass",
+    tags:["Athletics/Sports",]
+
+  },
+  {
+    name:"Business Club",
+    description:"Network with people",
+    tags:["Professional","Business"]
+
+  },
+]
+
 export default async function Home() {
   const session = await auth();
 
@@ -32,6 +65,16 @@ export default async function Home() {
             </div>
           </div>          
         </div>
+        <div className="flex flex-col items-center gap-4 mt-8">
+          <p className="text-center text-2xl text-white">
+            Mock Clubs
+          </p>
+          {mockClubs.map((club, index) => (
+            <p key={index} className="text-xl text-white">
+              {club.name}, {club.description}, {club.tags.join(", ")}
+            </p>
+          ))}
+          </div>
       </main>
 
     </HydrateClient>
