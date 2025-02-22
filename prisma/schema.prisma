@@ -68,3 +68,11 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+
+model Club {
+    id            String    @id @default(cuid())
+    name          String    @unique
+    description   String?
+    website       String?  
+    image         String?
+}
