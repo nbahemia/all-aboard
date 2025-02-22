@@ -12,7 +12,7 @@ function SearchBar() {
                     <input
                         type="text"
                         id="simple-search"
-                        className="bg-white border border-gray-300 text-gray-900 text-lg rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3"
+                        className="bg-white border text-gray-950 shadow-lg text-lg rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3"
                         placeholder="Club Search..."
                     />
                 </div>
