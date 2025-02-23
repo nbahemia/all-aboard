@@ -1,32 +1,59 @@
-function ClubCard({ name, description, image, website }: { name: string; description?: string; image?: string; website?: string }) {
-    return (
-        <div className="flex flex-col bg-white/90 shadow-lg rounded-lg w-3/5 h-auto p-6 mt-6">
-            <div className="inline-block mt-2">
-                {image && (
-                    <img className="rounded-full shadow-full pb-4" src={image} alt="{name}" />
-                )}
+import db from "@/server/db";
+import { Club } from "@prisma/client";
 
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-                    {website ? (
-                        <a href={website} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 hover:underline">
-                            {name}
-                        </a>
-                    ) : (
-                        name
-                    )}
-                </h5>
-            </div>
-
-            {
-                description && (
-                    <div className="mt-2">
-                        <p className="font-normal text-gray-700 dark:text-gray-400">{description}</p>
-                    </div>
-                )
-            }
-        </div >
-    );
+let clubs: Club[] = [];
+try {
+    clubs = await db.club.findMany();
+} catch (error) {
+    console.error("Error fetching clubs:", error);
 }
 
+function ClubCard() {
 
-export default ClubCard
+    return (
+        <div>
+            {clubs.length > 0 ? (
+                clubs.map((club) => (
+                    <div
+                        key={club.id}
+                        className="flex flex-col bg-white/90 shadow-lg rounded-lg w-3/5 h-auto p-6 mt-6"
+                    >
+                        <div className="flex items-center">
+                            {club.image && (
+                                <img
+                                    className="rounded-full shadow-lg h-24 w-24 object-cover mr-4"
+                                    src={club.image}
+                                    alt={club.name}
+                                />
+                            )}
+
+                            <h5 className="text-2xl font-bold tracking-tight text-gray-900">
+                                {club.website ? (
+                                    <a
+                                        href={club.website}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-500 hover:underline"
+                                    >
+                                        {club.name}
+                                    </a>
+                                ) : (
+                                    club.name
+                                )}
+                            </h5>
+                        </div>
+
+                        {club.description && (
+                            <p className="mt-2 font-normal text-gray-700 dark:text-gray-400">
+                                {club.description}
+                            </p>
+                        )}
+                    </div>
+                ))
+            ) : (
+                <p className="text-xl text-white">No clubs available.</p>
+            )}
+        </div>
+    );
+}
+export default ClubCard;
