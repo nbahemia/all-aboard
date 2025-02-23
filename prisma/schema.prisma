@@ -76,6 +76,6 @@ model Club {
     website       String?  
     image         String?
 
-    tags      String[] 
+    tags      String[]
 }
 

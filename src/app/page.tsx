@@ -3,12 +3,14 @@ import { auth } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
 import db from "@/server/db"
 import { Club } from "@prisma/client";
+
 let clubs: Club[] = [];
 try {
   clubs = await db.club.findMany();
 } catch (error) {
   console.error("Error fetching clubs:", error);
 }
+export const dynamic = "force-dynamic"
 const mockClubs = [
   {
     name:"BoilerMake",
@@ -42,7 +44,8 @@ const mockClubs = [
   },
 ]
 
-export default async function Home() {
+export default async function Home({ Component, pageProps }: AppProps) {
+  
   const session = await auth();
 
   if (session?.user) {
@@ -50,6 +53,7 @@ export default async function Home() {
   }
 
   return (
+
     <HydrateClient>
       <main className="flex min-h-screen flex-col items-center justify-start bg-gradient-to-b from-[#87CEFA] to-[#4682B4] text-white">
         <h1 className="text-5xl textshadow font-extrabold tracking-tight sm:text-[5rem] mt-16" style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)"}}>
@@ -63,12 +67,24 @@ export default async function Home() {
               </p>
             )}
             <div className="flex flex-wrap items-center justify-center gap-4 mt-16">
-              <Link
-                href={session ? "/api/auth/signout" : "/api/auth/signin"}
-                className="rounded-full bg-white/50 hover:bg-white/60 px-10 py-3 font-semibold no-underline transition"
-              >
-                {session ? "Log out" : "Find Clubs"}
-              </Link>
+            
+              {/* Redirect the user to the home page or sign in */}
+              {session ? (
+                <Link
+                  href="/home" // Redirect to a personalized home page
+                  className="rounded-full bg-white/50 hover:bg-white/60 px-10 py-3 font-semibold no-underline transition"
+                >
+                  Go to Home
+                </Link>
+              ) : (
+                <Link
+                  href="/api/auth/signin" // Redirect to the sign-in page if not logged in
+                  className="rounded-full bg-white/50 hover:bg-white/60 px-10 py-3 font-semibold no-underline transition"
+                >
+                  Sign In
+                </Link>
+              )}
+            
             </div>
           </div>          
         </div>
