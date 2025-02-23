@@ -3,7 +3,11 @@ import { Club } from "@prisma/client";
 
 let clubs: Club[] = [];
 try {
-    clubs = await db.club.findMany();
+    clubs = await db.club.findMany({
+        orderBy: {
+            name: 'asc', 
+        }
+    });
 } catch (error) {
     console.error("Error fetching clubs:", error);
 }

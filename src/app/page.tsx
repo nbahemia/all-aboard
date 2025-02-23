@@ -13,38 +13,6 @@ try {
   console.error("Error fetching clubs:", error);
 }
 export const dynamic = "force-dynamic"
-const mockClubs = [
-  {
-    name:"BoilerMake",
-    description:"Manage a hackathon",
-    tags:["Professional","Development"]
-
-  },
-  {
-    name:"USB",
-    description:"Undergrauate Student Board",
-    tags:["Professional","Event Planning"]
-
-  },
-  {
-    name:"Rock Climbing Club",
-    description:"Rock climbing",
-    tags:["Athletics/Sports","Recreational"]
-
-  },
-  {
-    name:"Outing Club",
-    description:"Touch grass",
-    tags:["Athletics/Sports",]
-
-  },
-  {
-    name:"Business Club",
-    description:"Network with people",
-    tags:["Professional","Business"]
-
-  },
-]
 
 export default async function Home() {
   
