@@ -2,6 +2,8 @@ import db from "@/server/db";
 import { Club } from "@prisma/client";
 
 let clubs: Club[] = [];
+let filteredClubs: Club[] = [];
+
 try {
     clubs = await db.club.findMany({
         orderBy: {
