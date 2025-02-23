@@ -59,6 +59,8 @@ model User {
     accounts      Account[]
     sessions      Session[]
     posts         Post[]
+
+    tags          String[]
 }
 
 model VerificationToken {
