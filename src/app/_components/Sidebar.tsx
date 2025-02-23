@@ -20,8 +20,12 @@ function Sidebar() {
 
             <div className="flex-grow"></div>
 
-            <div className="mb-6">
+            <div className="flex items-center justify-between mb-6 w-full px-4">
                 <img src={DefaultIcon.src} alt="Profile" className="rounded-full shadow-lg h-16 w-16" />
+                <button type="button" className="text-black bg-white hover:bg-white/30 focus:ring-4 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2">
+                    Sign Out
+                </button>
+
             </div>
         </div>
     );

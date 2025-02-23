@@ -32,7 +32,7 @@ function ClubDropDown() {
             </button>
 
             {isOpen && (
-                <div className="absolute z-10 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600 mt-2">
+                <div className="absolute z-10 w-48 h-30 overflow-auto bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600 mt-2">
                     <ul className="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200">
                         {categories.map((category) => (
                             <li key={category}>
