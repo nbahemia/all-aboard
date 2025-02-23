@@ -43,7 +43,7 @@ export default async function Home() {
                   href="/dashboard" 
                   className="rounded-full bg-white/50 hover:bg-white/60 px-10 py-3 font-semibold no-underline transition"
                 >
-                  Go to Home
+                  Dashboard
                 </Link>
               ) : (
                 <SignInButton />
