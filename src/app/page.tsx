@@ -1,8 +1,10 @@
+
 import Link from "next/link";
 import { auth } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
 import db from "@/server/db"
 import { Club } from "@prisma/client";
+import SignInButton from "@/app/_components/signInButton"
 
 let clubs: Club[] = [];
 try {
@@ -76,31 +78,13 @@ export default async function Home() {
                   Go to Home
                 </Link>
               ) : (
-                <Link
-                  href="/api/auth/signin" // Redirect to the sign-in page if not logged in
-                  className="rounded-full bg-white/50 hover:bg-white/60 px-10 py-3 font-semibold no-underline transition"
-                >
-                  Sign In
-                </Link>
+                <SignInButton />
               )}
             
             </div>
           </div>          
         </div>
-        <div className="flex flex-col items-center gap-4 mt-8">
-          <p className="text-center text-2xl text-white">
-            Clubs
-          </p>
-          {clubs.length > 0 ? (
-            clubs.map((club) => (
-              <p key={club.id} className="text-xl text-white">
-                {club.name}, {club.description}, {club.tags?.join(", ") || "No tags available"}
-              </p>
-            ))
-          ) : (
-            <p className="text-xl text-white">No clubs available.</p>
-          )}
-          </div>
+        
       </main>
 
     </HydrateClient>
