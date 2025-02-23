@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { auth } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
-
+import db from "@/server/db"
+import { Club } from "@prisma/client";
+let clubs: Club[] = [];
+try {
+  clubs = await db.club.findMany();
+} catch (error) {
+  console.error("Error fetching clubs:", error);
+}
 const mockClubs = [
   {
     name:"BoilerMake",
@@ -67,13 +74,17 @@ export default async function Home() {
         </div>
         <div className="flex flex-col items-center gap-4 mt-8">
           <p className="text-center text-2xl text-white">
-            Mock Clubs
+            Clubs
           </p>
-          {mockClubs.map((club, index) => (
-            <p key={index} className="text-xl text-white">
-              {club.name}, {club.description}, {club.tags.join(", ")}
-            </p>
-          ))}
+          {clubs.length > 0 ? (
+            clubs.map((club) => (
+              <p key={club.id} className="text-xl text-white">
+                {club.name}, {club.description}, {club.tags?.join(", ") || "No tags available"}
+              </p>
+            ))
+          ) : (
+            <p className="text-xl text-white">No clubs available.</p>
+          )}
           </div>
       </main>
 

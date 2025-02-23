@@ -76,21 +76,6 @@ model Club {
     website       String?  
     image         String?
 
-    tags      ClubTag[] 
+    tags      String[] 
 }
 
-model Tag {
-    id            String    @id @default(cuid())
-    name          String    @unique
-
-    clubs        ClubTag[]
-}
-
-model ClubTag {
-  club            Club      @relation(fields: [clubId], references: [id])
-  clubId          String
-  tag             Tag       @relation(fields: [tagId], references: [id])
-  tagId           String
-  
-  @@id([clubId, tagId])
-}
