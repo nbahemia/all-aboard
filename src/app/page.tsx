@@ -44,7 +44,7 @@ const mockClubs = [
   },
 ]
 
-export default async function Home({ Component, pageProps }: AppProps) {
+export default async function Home() {
   
   const session = await auth();
 
@@ -68,10 +68,9 @@ export default async function Home({ Component, pageProps }: AppProps) {
             )}
             <div className="flex flex-wrap items-center justify-center gap-4 mt-16">
             
-              {/* Redirect the user to the home page or sign in */}
               {session ? (
                 <Link
-                  href="/home" // Redirect to a personalized home page
+                  href="/dashboard" 
                   className="rounded-full bg-white/50 hover:bg-white/60 px-10 py-3 font-semibold no-underline transition"
                 >
                   Go to Home
